@@ -11,7 +11,7 @@ let temp = 30
 let isFreezing = temp <= 32
 
 if (isFreezing) {
-    console.log('It is freezing outside!')
+  console.log('It is freezing outside!')
 }
 
 // Challenge
@@ -23,9 +23,9 @@ if (isFreezing) {
 let myAge = 23
 
 if (myAge <= 7) {
-    console.log('Child discount!')
+  console.log('Child discount!')
 }
 
 if (myAge >= 65) {
-    console.log('Senior discount!')
+  console.log('Senior discount!')
 }

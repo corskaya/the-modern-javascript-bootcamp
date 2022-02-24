@@ -1,21 +1,21 @@
 // Lesson
 
 // Global (name)
-    // Local (name)
-        // Local
-    // Local
+// Local (name)
+// Local
+// Local
 
 let name = 'Çağrı'
 
 if (true) {
-    let name = 'Hakan'
+  let name = 'Hakan'
 
-    if (true) {
-        name = 'Hande'
-        console.log(name) // will print Hande
-    }    
+  if (true) {
+    name = 'Hande'
+    console.log(name) // will print Hande
+  }
 }
 
 if (true) {
-    console.log(name) // will print Çağrı
+  console.log(name) // will print Çağrı
 }

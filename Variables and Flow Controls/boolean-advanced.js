@@ -3,9 +3,9 @@
 let isAccountLocked = true
 
 if (isAccountLocked) {
-    console.log('Account is locked')
+  console.log('Account is locked')
 } else {
-    console.log('Welcome!')
+  console.log('Welcome!')
 }
 
 // Challenge
@@ -16,9 +16,9 @@ let temp = 45
 // It is pretty nice!
 
 if (temp < 10) {
-    console.log('It is freezing outside!')
+  console.log('It is freezing outside!')
 } else if (temp > 50) {
-    console.log('It is hot outside!')
+  console.log('It is hot outside!')
 } else {
-    console.log('It is pretty nice outside')
+  console.log('It is pretty nice outside')
 }
