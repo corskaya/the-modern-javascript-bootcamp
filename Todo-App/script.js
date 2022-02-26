@@ -15,31 +15,49 @@ const todos = [{
   completed: true
 }]
 
-// Challenge
-// You have 2 todos to left (p element)
-// Add a p for each todo above (use text value)
-
-const leftToDo = todos.filter(todo => !todo.completed)
 const body = document.querySelector('body')
-let thing
+const input = document.querySelector('#add-todo')
+const button = document.querySelector('button')
+const filterInput = document.querySelector('#filter-todo')
+let leftToDo
+let inputValue
+let filterValue = filterInput.innerHTML
 
-let explanation = document.createElement('h3')
-explanation.textContent = `You have ${leftToDo.length} todos left`
-document.querySelector('body').appendChild(explanation)
+///////////////////////// Challenge ////////////////////////
+// Add todos from input
+// Filter todos
 
-leftToDo.forEach(todo => {
-  thing = document.createElement('p')
-  thing.textContent = `- ${todo.text}`
-  body.appendChild(thing)
+const renderTodos = function () {
+  document.querySelector('#todos-area').innerHTML = ''
+
+  leftToDo = todos.filter(todo => !todo.completed)
+  leftToDo.forEach(todo => {
+    if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
+      let newItem = document.createElement('p')
+      newItem.textContent = todo.text
+      document.querySelector('#todos-area').appendChild(newItem)
+    }
+  })
+
+  let explanation = document.createElement('h3')
+  explanation.textContent = `You have ${leftToDo.length} todos left`
+  document.querySelector('#explanation').innerHTML = ''
+  document.querySelector('#explanation').appendChild(explanation)
+}
+
+renderTodos()
+
+filterInput.addEventListener('input', function (e) {
+  filterValue = e.target.value
+  renderTodos()
 })
 
-// Another challenge
-// Add a button and make new todo occurs when you click
-
-const button = document.querySelector('button')
+input.addEventListener('change', e => inputValue = e.target.value)
 
 button.addEventListener('click', function () {
-  thing = document.createElement('p')
-  thing.textContent = '- New todo'
-  body.appendChild(thing)
+  if (inputValue !== undefined) {
+    todos.push({ text: inputValue, completed: false })
+  }
+  renderTodos()
+  console.log(input)
 })

@@ -9,8 +9,35 @@ const notes = [{
   body: 'Get a new seat'
 }]
 
-document.querySelector('button').addEventListener('click', function (e) {
+const filters = {
+  searchText: ''
+}
+
+const renderNotes = function (notes, filters) {
+  const filteredNotes = notes.filter(note => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
+
+  document.querySelector('#notes').innerHTML = ''
+
+  filteredNotes.forEach(note => {
+    const noteEl = document.createElement('p')
+    noteEl.textContent = note.title
+    document.querySelector('#notes').appendChild(noteEl)
+  })
+}
+
+renderNotes(notes, filters)
+
+document.querySelector('#create-note').addEventListener('click', function (e) {
   e.target.textContent = 'The button was clicked'
   // target property is a representation of that element
   // e event argument is useful when we want to do something with the element we reached
+})
+
+document.querySelector('#remove-all').addEventListener('click', function () {
+  document.querySelectorAll('.note').forEach(note => note.remove())
+})
+
+document.querySelector('#search-text').addEventListener('input', function (e) {
+  filters.searchText = e.target.value
+  renderNotes(notes, filters)
 })
