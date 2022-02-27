@@ -33,25 +33,17 @@ let hideCheck = false
 
 const renderTodos = function () {
   document.querySelector('#todos-area').innerHTML = ''
-
   leftToDo = todos.filter(todo => !todo.completed)
-  if (hideCheck) {
-    leftToDo.forEach(todo => {
-      if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
-        let newItem = document.createElement('p')
-        newItem.textContent = todo.text
-        document.querySelector('#todos-area').appendChild(newItem)
-      }
-    })
-  } else {
-    todos.forEach(todo => {
-      if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
-        let newItem = document.createElement('p')
-        newItem.textContent = todo.text
-        document.querySelector('#todos-area').appendChild(newItem)
-      }
-    })
-  }
+
+  let showingTodos = hideCheck ? leftToDo : todos
+
+  showingTodos.forEach(todo => {
+    if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
+      let newItem = document.createElement('p')
+      newItem.textContent = todo.text
+      document.querySelector('#todos-area').appendChild(newItem)
+    }
+  })
 
   let explanation = document.createElement('h3')
   explanation.textContent = `You have ${leftToDo.length} todos left`
