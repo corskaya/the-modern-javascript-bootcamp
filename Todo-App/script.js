@@ -1,19 +1,4 @@
-const todos = [{
-  text: 'Order cat food',
-  completed: true
-}, {
-  text: 'Clean kitchen',
-  completed: false
-}, {
-  text: 'Buy food',
-  completed: true
-}, {
-  text: 'Do work',
-  completed: false
-}, {
-  text: 'Exercise',
-  completed: true
-}]
+let todos = []
 
 const body = document.querySelector('body')
 const input = document.querySelector('#todo-form').elements.input
@@ -26,10 +11,14 @@ let filterValue = filterInput.innerHTML
 let hideCheck = false
 
 ///////////////////////// Challenge ////////////////////////
-// 1) Create a checkbox and setup event listener -> "Hide completed"
-// 2) Create new hideCompleted filter (default false)
-// 3) Update hideCompleted and rerender list on checkbox challenge
-// 4) Setup renderTodos to remove completed items
+// 1) Delete dummy data
+// 2) Read and parse the data when the app starts up
+// 3) Stringify and write the data when new data is added
+
+const todosJSON = localStorage.getItem('todos')
+if (todosJSON !== null) {
+  todos = JSON.parse(todosJSON)
+}
 
 const renderTodos = function () {
   document.querySelector('#todos-area').innerHTML = ''
@@ -62,7 +51,9 @@ input.addEventListener('change', e => inputValue = e.target.value)
 
 button.addEventListener('click', function () {
   if (inputValue !== undefined) {
-    todos.push({ text: inputValue, completed: false })
+    let todoContent = { text: inputValue, completed: false }
+    todos.push(todoContent)
+    localStorage.setItem('todos', JSON.stringify(todos))
   }
   renderTodos()
   input.value = ''
