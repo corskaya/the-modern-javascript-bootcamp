@@ -16,8 +16,8 @@ const todos = [{
 }]
 
 const body = document.querySelector('body')
-const input = document.querySelector('#add-todo')
-const button = document.querySelector('button')
+const input = document.querySelector('#todo-form').elements.input
+const button = document.querySelector('#todo-form').elements.button
 const filterInput = document.querySelector('#filter-todo')
 let leftToDo
 let inputValue
@@ -26,6 +26,7 @@ let filterValue = filterInput.innerHTML
 ///////////////////////// Challenge ////////////////////////
 // Add todos from input
 // Filter todos
+// Replace add todos area into form element
 
 const renderTodos = function () {
   document.querySelector('#todos-area').innerHTML = ''
@@ -59,5 +60,10 @@ button.addEventListener('click', function () {
     todos.push({ text: inputValue, completed: false })
   }
   renderTodos()
-  console.log(input)
+  input.value = ''
+  inputValue = undefined
+})
+
+document.querySelector('#todo-form').addEventListener('submit', function (e) {
+  e.preventDefault()
 })
