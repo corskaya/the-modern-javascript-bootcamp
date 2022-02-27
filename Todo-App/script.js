@@ -19,26 +19,39 @@ const body = document.querySelector('body')
 const input = document.querySelector('#todo-form').elements.input
 const button = document.querySelector('#todo-form').elements.button
 const filterInput = document.querySelector('#filter-todo')
+const hideCompleted = document.querySelector('#hide-completed')
 let leftToDo
 let inputValue
 let filterValue = filterInput.innerHTML
+let hideCheck = false
 
 ///////////////////////// Challenge ////////////////////////
-// Add todos from input
-// Filter todos
-// Replace add todos area into form element
+// 1) Create a checkbox and setup event listener -> "Hide completed"
+// 2) Create new hideCompleted filter (default false)
+// 3) Update hideCompleted and rerender list on checkbox challenge
+// 4) Setup renderTodos to remove completed items
 
 const renderTodos = function () {
   document.querySelector('#todos-area').innerHTML = ''
 
   leftToDo = todos.filter(todo => !todo.completed)
-  leftToDo.forEach(todo => {
-    if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
-      let newItem = document.createElement('p')
-      newItem.textContent = todo.text
-      document.querySelector('#todos-area').appendChild(newItem)
-    }
-  })
+  if (hideCheck) {
+    leftToDo.forEach(todo => {
+      if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
+        let newItem = document.createElement('p')
+        newItem.textContent = todo.text
+        document.querySelector('#todos-area').appendChild(newItem)
+      }
+    })
+  } else {
+    todos.forEach(todo => {
+      if (todo.text.toLowerCase().includes(filterValue.toLowerCase())) {
+        let newItem = document.createElement('p')
+        newItem.textContent = todo.text
+        document.querySelector('#todos-area').appendChild(newItem)
+      }
+    })
+  }
 
   let explanation = document.createElement('h3')
   explanation.textContent = `You have ${leftToDo.length} todos left`
@@ -66,4 +79,9 @@ button.addEventListener('click', function () {
 
 document.querySelector('#todo-form').addEventListener('submit', function (e) {
   e.preventDefault()
+})
+
+hideCompleted.addEventListener('change', function (e) {
+  hideCheck = e.target.checked
+  renderTodos()
 })
