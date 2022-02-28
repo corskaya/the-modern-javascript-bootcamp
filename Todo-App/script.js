@@ -23,7 +23,7 @@ input.addEventListener('change', function (e) {
 
 button.addEventListener('click', function () {
   if (inputValue !== undefined) {
-    let todoContent = { text: inputValue, completed: false }
+    let todoContent = { id: uuidv4(), text: inputValue, completed: false }
     todos.push(todoContent)
     saveTodos(todos)
   }
