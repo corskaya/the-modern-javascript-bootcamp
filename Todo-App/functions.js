@@ -59,6 +59,9 @@ const generateTodoDOM = function () {
         todo.completed = e.target.checked
         saveTodos(todos)
         getSummary()
+        if (hideCheck) {
+          renderTodos()
+        }
       })
 
       // Setup todo text
