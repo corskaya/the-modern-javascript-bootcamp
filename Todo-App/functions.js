@@ -1,10 +1,7 @@
 ///////////////////////// Challenge ////////////////////////
-// 1) Setup a root div
-// 2) Setup and append a checkbox (set type attribute) // someNode.setAttribute('type', 'checkbox')
-// 3) Setup and append a span (set text)
-// 4) Setup and append a button (set text)
-// 5) Add uuidv4 library
-// 6) Set unique id to todos
+// 1) Wire up button event
+// 2) Remove todo by id
+// 3) Save and rerender the todos list
 
 // Fetch existing todos from localStorage
 const getSavedTodos = function () {
@@ -20,6 +17,17 @@ const getSavedTodos = function () {
 // Save todos to localStorage
 const saveTodos = function (todos) {
   localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+// Remove todos
+const removeTodo = function (id) {
+  const todoIndex = todos.findIndex(todo => todo.id === id)
+
+  if (todoIndex > -1) {
+    todos.splice(todoIndex, 1)
+  }
+  saveTodos(todos)
+  renderTodos()
 }
 
 // Render application todos based on filters
@@ -55,6 +63,9 @@ const generateTodoDOM = function () {
       // Setup the remove button
       removeButton.textContent = 'x'
       todoArea.appendChild(removeButton)
+      removeButton.addEventListener('click', function () {
+        removeTodo(todo.id)
+      })
     }
   })
 }
