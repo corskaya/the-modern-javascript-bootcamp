@@ -2,11 +2,7 @@
 const getSavedNotes = () => {
   const notesJSON = localStorage.getItem('notes')
 
-  if (notesJSON !== null) {
-    return JSON.parse(notesJSON)
-  } else {
-    return []
-  }
+  return notesJSON !== null ? JSON.parse(notesJSON) : []
 }
 
 // Save the notes to localStorage
@@ -74,7 +70,7 @@ const sortNotes = (notes, sortBy) => {
 }
 
 // Render application notes 
-const renderNotes = function (notes, filters) {
+const renderNotes = (notes, filters) => {
   notes = sortNotes(notes, filters.sort)
   const filteredNotes = notes.filter(note => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
@@ -87,6 +83,6 @@ const renderNotes = function (notes, filters) {
   })
 }
 
-const generateLastEdited = function (timestamp) {
+const generateLastEdited = timestamp => {
   return `Last edited ${moment(timestamp).fromNow()}`
 }
