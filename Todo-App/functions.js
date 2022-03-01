@@ -2,7 +2,7 @@
 // 1) Add Completed feature with checkboxes
 
 // Fetch existing todos from localStorage
-const getSavedTodos = function () {
+const getSavedTodos = () => {
   const todosJSON = localStorage.getItem('todos')
 
   if (todosJSON !== null) {
@@ -13,12 +13,12 @@ const getSavedTodos = function () {
 }
 
 // Save todos to localStorage
-const saveTodos = function (todos) {
+const saveTodos = todos => {
   localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 // Remove todos
-const removeTodo = function (id) {
+const removeTodo = id => {
   const todoIndex = todos.findIndex(todo => todo.id === id)
 
   if (todoIndex > -1) {
@@ -29,7 +29,7 @@ const removeTodo = function (id) {
 }
 
 // Render application todos based on filters
-const renderTodos = function () {
+const renderTodos = () => {
   document.querySelector('#todos-area').innerHTML = ''
 
   generateTodoDOM()
@@ -37,7 +37,7 @@ const renderTodos = function () {
 }
 
 // Get the DOM elements for an individual note
-const generateTodoDOM = function () {
+const generateTodoDOM = () => {
   let showingTodos = hideCheck ? leftToDo : todos
 
   showingTodos.forEach(todo => {
@@ -55,7 +55,7 @@ const generateTodoDOM = function () {
       if (todo.completed) checkbox.setAttribute('checked', '')
 
       todoArea.appendChild(checkbox)
-      checkbox.addEventListener('change', function (e) {
+      checkbox.addEventListener('change', e => {
         todo.completed = e.target.checked
         saveTodos(todos)
         getSummary()
@@ -71,7 +71,7 @@ const generateTodoDOM = function () {
       // Setup the remove button
       removeButton.textContent = 'x'
       todoArea.appendChild(removeButton)
-      removeButton.addEventListener('click', function () {
+      removeButton.addEventListener('click', () => {
         removeTodo(todo.id)
         renderTodos()
       })
@@ -80,7 +80,7 @@ const generateTodoDOM = function () {
 }
 
 // Get the DOM elements for list summary
-const getSummary = function () {
+const getSummary = () => {
   leftToDo = todos.filter(todo => !todo.completed)
   let explanation = document.createElement('h3')
   explanation.textContent = `You have ${leftToDo.length} todos left`

@@ -12,16 +12,16 @@ const todos = getSavedTodos()
 
 renderTodos()
 
-filterInput.addEventListener('input', function (e) {
+filterInput.addEventListener('input', e => {
   filterValue = e.target.value
   renderTodos()
 })
 
-input.addEventListener('change', function (e) {
+input.addEventListener('change', e => {
   inputValue = e.target.value
 })
 
-button.addEventListener('click', function () {
+button.addEventListener('click', e => {
   if (inputValue !== undefined) {
     let todoContent = { id: uuidv4(), text: inputValue, completed: false, checked: false }
     todos.push(todoContent)
@@ -32,11 +32,11 @@ button.addEventListener('click', function () {
   inputValue = undefined
 })
 
-document.querySelector('#todo-form').addEventListener('submit', function (e) {
+document.querySelector('#todo-form').addEventListener('submit', e => {
   e.preventDefault()
 })
 
-hideCompleted.addEventListener('change', function (e) {
+hideCompleted.addEventListener('change', e => {
   hideCheck = e.target.checked
   renderTodos()
 })

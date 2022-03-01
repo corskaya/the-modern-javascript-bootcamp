@@ -19,27 +19,27 @@ editInfo.textContent = generateLastEdited(note.updatedAt)
 // 2) Set text value: Last edited 4 hours ago
 // 3) Update value on title/body/storage change
 
-noteTitle.addEventListener('input', function (e) {
+noteTitle.addEventListener('input', e => {
   note.title = e.target.value
   note.updatedAt = moment().valueOf()
   editInfo.textContent = generateLastEdited(note.updatedAt)
   saveNotes(notes)
 })
 
-noteBody.addEventListener('input', function (e) {
+noteBody.addEventListener('input', e => {
   note.body = e.target.value
   note.updatedAt = moment().valueOf()
   editInfo.textContent = generateLastEdited(note.updatedAt)
   saveNotes(notes)
 })
 
-remove.addEventListener('click', function () {
+remove.addEventListener('click', () => {
   removeNote(noteId)
   saveNotes(notes)
   location.assign('./index.html')
 })
 
-window.addEventListener('storage', function (e) {
+window.addEventListener('storage', e => {
   if (e.key === 'notes') {
     notes = JSON.parse(e.newValue)
     note = notes.find(note => note.id === noteId)
