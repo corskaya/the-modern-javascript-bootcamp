@@ -4,6 +4,7 @@ let note = notes.find(note => note.id === noteId)
 const noteTitle = document.querySelector('#note-title')
 const noteBody = document.querySelector('#note-body')
 const remove = document.querySelector('#remove-note')
+const editInfo = document.querySelector('#edit-info')
 
 if (note === undefined) {
   location.assign('./index.html')
@@ -11,20 +12,24 @@ if (note === undefined) {
 
 noteTitle.value = note.title
 noteBody.value = note.body
+editInfo.textContent = generateLastEdited(note.updatedAt)
 
 /////////////////////// Challenge ///////////////////////
-// 1) Setup input event for title
-// 2) Update note object and save notes list
-// 3) Repeat steps 1-2 for body
-// 4) Setup a remove button that removes notes and sends user back to home page
+// 1) Add a DOM element between the title and body inputs (empty span)
+// 2) Set text value: Last edited 4 hours ago
+// 3) Update value on title/body/storage change
 
 noteTitle.addEventListener('input', function (e) {
   note.title = e.target.value
+  note.updatedAt = moment().valueOf()
+  editInfo.textContent = generateLastEdited(note.updatedAt)
   saveNotes(notes)
 })
 
 noteBody.addEventListener('input', function (e) {
   note.body = e.target.value
+  note.updatedAt = moment().valueOf()
+  editInfo.textContent = generateLastEdited(note.updatedAt)
   saveNotes(notes)
 })
 
@@ -45,5 +50,6 @@ window.addEventListener('storage', function (e) {
 
     noteTitle.value = note.title
     noteBody.value = note.body
+    editInfo.textContent = generateLastEdited(note.updatedAt)
   }
 })
