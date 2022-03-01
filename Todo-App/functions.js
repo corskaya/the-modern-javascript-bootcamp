@@ -1,5 +1,4 @@
-///////////////////////// Challenge ////////////////////////
-// 1) Add Completed feature with checkboxes
+'use strict'
 
 // Fetch existing todos from localStorage
 const getSavedTodos = () => {

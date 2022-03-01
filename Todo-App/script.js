@@ -1,3 +1,5 @@
+'use strict'
+
 const body = document.querySelector('body')
 const input = document.querySelector('#todo-form').elements.input
 const button = document.querySelector('#todo-form').elements.button
