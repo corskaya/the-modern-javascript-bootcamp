@@ -11,7 +11,7 @@ if (product) {
 
 // Truthy - Values that resolve to true in boolean context
 // Falsy - Values that resolve to false in boolean context
-// Falsy values - false, 0, empty string, null, undefined
+// Falsy values - false, 0, empty string, null, undefined, NaN
 // Anything that not falsy is truthy
 
 // if (undefined) { // prints Product not found
