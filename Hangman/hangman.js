@@ -1,13 +1,22 @@
-/////////////// Challenge 1 ///////////////
-// Create a method for making a guess
-// 1) Should accept a character for guessing
-// 2) Should add unique guesses to list of guesses
-// 3) Should decrement the guesses left if a unique guess isn't a match
+/////////////// Challenge 3 ///////////////
+// 1) Display the puzzle to the browser instead of the console
+// 2) Display the guesses left to the browser instead of console
+// 3) Separate the Hangman definition from the rest of the app code (use app.js)
+// 4) Setup new "status" value property with initial value of playing
+// 5) Create method for recalculating status to "playing", "finised" or "failed"
+// 6) Call that method after a guess is processed
+// 7) Use console.log to print the status
+
+// Start the game and see "playing"
+// Make two incorrect guesses to see "failed"
+// Refresh the browser and guess "c", "a" and "t" to see "finished"
+
 
 const HangmanGame = function (word, remainingGuesses) {
   this.word = word.toLowerCase().split('')
   this.remainingGuesses = remainingGuesses
   this.guessedLetters = []
+  this.status = 'Playing'
 }
 
 HangmanGame.prototype.getPuzzle = function () {
@@ -29,28 +38,27 @@ HangmanGame.prototype.makeGuess = function (char) {
   const isUnique = this.guessedLetters.every(letter => letter !== char)
   const isBadGuess = !this.word.includes(char)
 
-  if (isUnique) {
+  if (isUnique && this.status === 'Playing') {
     this.guessedLetters.push(char)
   }
 
-  if (isUnique && isBadGuess) {
+  if (isUnique && isBadGuess && this.status === 'Playing') {
     this.remainingGuesses--
   }
 
-  return `Remaining guesses: ${this.remainingGuesses}`
+  this.updateStatus()
 }
 
-const game1 = new HangmanGame('Cat', 2)
-// Guess c, t, z 
-// Test
-console.log(game1.makeGuess('c'))
-console.log(game1.makeGuess('t'))
-console.log(game1.makeGuess('z'))
-console.log(game1.getPuzzle()) // c*t
-// Print remaining guesses (should be 1)
+HangmanGame.prototype.updateStatus = function () {
+  const puzzle = this.getPuzzle()
 
-const game2 = new HangmanGame('New Jersey', 3)
-// Guess w 
-// Test
-console.log(game2.makeGuess('w'))
-console.log(game2.getPuzzle()) // **w ******
+  if (this.remainingGuesses === 0) {
+    this.status = 'Failed'
+  } else {
+    if (puzzle.includes('*')) {
+      this.status = 'Playing'
+    } else {
+      this.status = 'Finished'
+    }
+  }
+}
