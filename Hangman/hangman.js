@@ -1,4 +1,7 @@
-/////////////// Class Syntax ///////////////
+/////////////// Challenge ///////////////
+// 1) Convert "getStatusMessage()" to a custom getter for "statusMessage"
+// 2) Convert "getPuzzle()" to a custom getter for "puzzle"
+// 3) Change usage in app.js
 
 class HangmanGame {
   constructor(word, remainingGuesses) {
@@ -8,7 +11,7 @@ class HangmanGame {
     this.status = 'Playing'
   }
 
-  getPuzzle() {
+  get puzzle() {
     let puzzle = ''
 
     this.word.forEach(letter => {
@@ -39,7 +42,7 @@ class HangmanGame {
   }
 
   updateStatus() {
-    const puzzle = this.getPuzzle()
+    const puzzle = this.puzzle
 
     if (this.remainingGuesses === 0) {
       this.status = 'Failed'
@@ -52,7 +55,7 @@ class HangmanGame {
     }
   }
 
-  getStatusMessage() {
+  get statusMessage() {
     if (this.status === 'Playing') {
       status.textContent = `Guesses left: ${game1.remainingGuesses}`
     } else if (this.status === 'Failed') {
