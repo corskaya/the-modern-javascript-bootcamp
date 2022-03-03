@@ -1,15 +1,10 @@
-/////////////// Challenge 3 ///////////////
-// 1) Display the puzzle to the browser instead of the console
-// 2) Display the guesses left to the browser instead of console
-// 3) Separate the Hangman definition from the rest of the app code (use app.js)
-// 4) Setup new "status" value property with initial value of playing
-// 5) Create method for recalculating status to "playing", "finised" or "failed"
-// 6) Call that method after a guess is processed
-// 7) Use console.log to print the status
+/////////////// Challenge 4 ///////////////
+// 1) Disable new guesses unless "playing" (Which I've already done in challenge 3)
+// 2) Setup a new method to get back a status message
 
-// Start the game and see "playing"
-// Make two incorrect guesses to see "failed"
-// Refresh the browser and guess "c", "a" and "t" to see "finished"
+// Playing -> Guesses left: 3
+// Failed -> Nice try! The word was "Cat".
+// Finished -> Great work! You guessed the word.
 
 
 const HangmanGame = function (word, remainingGuesses) {
@@ -60,5 +55,15 @@ HangmanGame.prototype.updateStatus = function () {
     } else {
       this.status = 'Finished'
     }
+  }
+}
+
+HangmanGame.prototype.getStatusMessage = function () {
+  if (this.status === 'Playing') {
+    status.textContent = `Guesses left: ${game1.remainingGuesses}`
+  } else if (this.status === 'Failed') {
+    status.textContent = `Nice try! The word was "${this.word.join('')}".`
+  } else {
+    status.textContent = `Great work! You guessed the word.`
   }
 }
