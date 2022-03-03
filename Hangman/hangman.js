@@ -1,69 +1,64 @@
-/////////////// Challenge 4 ///////////////
-// 1) Disable new guesses unless "playing" (Which I've already done in challenge 3)
-// 2) Setup a new method to get back a status message
+/////////////// Class Syntax ///////////////
 
-// Playing -> Guesses left: 3
-// Failed -> Nice try! The word was "Cat".
-// Finished -> Great work! You guessed the word.
+class HangmanGame {
+  constructor(word, remainingGuesses) {
+    this.word = word.toLowerCase().split('')
+    this.remainingGuesses = remainingGuesses
+    this.guessedLetters = []
+    this.status = 'Playing'
+  }
 
+  getPuzzle() {
+    let puzzle = ''
 
-const HangmanGame = function (word, remainingGuesses) {
-  this.word = word.toLowerCase().split('')
-  this.remainingGuesses = remainingGuesses
-  this.guessedLetters = []
-  this.status = 'Playing'
-}
+    this.word.forEach(letter => {
+      if (this.guessedLetters.includes(letter) || letter === ' ') {
+        puzzle += letter
+      } else {
+        puzzle += '*'
+      }
+    })
 
-HangmanGame.prototype.getPuzzle = function () {
-  let puzzle = ''
+    return puzzle
+  }
 
-  this.word.forEach(letter => {
-    if (this.guessedLetters.includes(letter) || letter === ' ') {
-      puzzle += letter
-    } else {
-      puzzle += '*'
+  makeGuess(char) {
+    char = char.toLowerCase()
+    const isUnique = this.guessedLetters.every(letter => letter !== char)
+    const isBadGuess = !this.word.includes(char)
+
+    if (isUnique && this.status === 'Playing') {
+      this.guessedLetters.push(char)
     }
-  });
 
-  return puzzle
-}
+    if (isUnique && isBadGuess && this.status === 'Playing') {
+      this.remainingGuesses--
+    }
 
-HangmanGame.prototype.makeGuess = function (char) {
-  char = char.toLowerCase()
-  const isUnique = this.guessedLetters.every(letter => letter !== char)
-  const isBadGuess = !this.word.includes(char)
-
-  if (isUnique && this.status === 'Playing') {
-    this.guessedLetters.push(char)
+    this.updateStatus()
   }
 
-  if (isUnique && isBadGuess && this.status === 'Playing') {
-    this.remainingGuesses--
-  }
+  updateStatus() {
+    const puzzle = this.getPuzzle()
 
-  this.updateStatus()
-}
-
-HangmanGame.prototype.updateStatus = function () {
-  const puzzle = this.getPuzzle()
-
-  if (this.remainingGuesses === 0) {
-    this.status = 'Failed'
-  } else {
-    if (puzzle.includes('*')) {
-      this.status = 'Playing'
+    if (this.remainingGuesses === 0) {
+      this.status = 'Failed'
     } else {
-      this.status = 'Finished'
+      if (puzzle.includes('*')) {
+        this.status = 'Playing'
+      } else {
+        this.status = 'Finished'
+      }
     }
   }
-}
 
-HangmanGame.prototype.getStatusMessage = function () {
-  if (this.status === 'Playing') {
-    status.textContent = `Guesses left: ${game1.remainingGuesses}`
-  } else if (this.status === 'Failed') {
-    status.textContent = `Nice try! The word was "${this.word.join('')}".`
-  } else {
-    status.textContent = `Great work! You guessed the word.`
+  getStatusMessage() {
+    if (this.status === 'Playing') {
+      status.textContent = `Guesses left: ${game1.remainingGuesses}`
+    } else if (this.status === 'Failed') {
+      status.textContent = `Nice try! The word was "${this.word.join('')}".`
+    } else {
+      status.textContent = `Great work! You guessed the word.`
+    }
   }
 }
