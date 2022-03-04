@@ -57,11 +57,11 @@ class HangmanGame {
 
   get statusMessage() {
     if (this.status === 'Playing') {
-      status.textContent = `Guesses left: ${game1.remainingGuesses}`
+      statusEl.textContent = `Guesses left: ${game1.remainingGuesses}`
     } else if (this.status === 'Failed') {
-      status.textContent = `Nice try! The word was "${this.word.join('')}".`
+      statusEl.textContent = `Nice try! The word was "${this.word.join('')}".`
     } else {
-      status.textContent = `Great work! You guessed the word.`
+      statusEl.textContent = `Great work! You guessed the word.`
     }
   }
 }
