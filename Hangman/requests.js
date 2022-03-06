@@ -9,23 +9,28 @@ const getPuzzle = async (count) => {
   }
 }
 
-const getCountryName = (countryCode) => {
-  return fetch('https://restcountries.com/v3.1/all').then((response) => {
-    if (response.status === 200) {
-      return response.json()
-    } else {
-      throw new Error('Failed to fetch data')
-    }
-  }).then((data) => {
+///////////////////// Challenge 1 //////////////////////
+// 1) Convert getCountryName to an async function that uses await
+// 2) Convert getLocation to an async function that uses await
+
+const getCountryName = async (countryCode) => {
+  const response = await fetch('https://restcountries.com/v3.1/all')
+
+  if (response.status === 200) {
+    const data = await response.json()
     const myCountry = data.find(country => country.cca2 === countryCode)
     return myCountry.name.common
-  })
+  } else {
+    throw new Error('Failed to fetch data')
+  }
 }
 
-const getLocation = () => fetch('http://ipinfo.io/json?token=67a1c53ef912ab').then((response) => {
+const getLocation = async () => {
+  const response = await fetch('http://ipinfo.io/json?token=67a1c53ef912ab')
+
   if (response.status === 200) {
     return response.json()
   } else {
     throw new Error('Unable to fetch data')
   }
-})
+}
