@@ -1,13 +1,6 @@
-// HTTP (Hypertext Transfer Protocol)
-// Request - What do we want to do
-// Response - What was actually done
-
 const puzzleEl = document.getElementById('puzzle')
 const statusEl = document.getElementById('status')
-const game1 = new HangmanGame('Cat', 2)
-
-puzzleEl.textContent = `Word : ${game1.puzzle}`
-statusEl.textContent = `Guesses left: ${game1.remainingGuesses}`
+let game1
 
 window.addEventListener('keypress', (e) => {
   if (game1.status === 'Playing') {
@@ -18,14 +11,29 @@ window.addEventListener('keypress', (e) => {
   }
 })
 
-getPuzzle('2').then((puzzle) => {
-  console.log(puzzle)
-}).catch((err) => {
-  console.log(err)
-})
+const render = () => {
+  puzzleEl.textContent = `Word : ${game1.puzzle}`
+  game1.statusMessage
+}
 
-getCurrentCountry().then((countryName) => {
-  console.log(countryName)
-}).catch((err) => {
-  console.log(err)
-})
+const startGame = async () => {
+  const puzzle = await getPuzzle('2')
+  game1 = new HangmanGame(puzzle, 5)
+  render()
+}
+
+document.querySelector('#reset').addEventListener('click', startGame)
+
+startGame()
+
+// getPuzzle('2').then((puzzle) => {
+//   console.log(puzzle)
+// }).catch((err) => {
+//   console.log(err)
+// })
+
+// getCurrentCountry().then((countryName) => {
+//   console.log(countryName)
+// }).catch((err) => {
+//   console.log(err)
+// })

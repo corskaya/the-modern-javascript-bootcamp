@@ -31,11 +31,6 @@ const getLocation = async () => {
   }
 }
 
-///////////////////// Challenge 2 //////////////////////
-// 1) Create a new function called getCurrentCountry
-// 2) Should return a promise that resolves the country object for your current location
-// 3) Use async/await for the new function
-
 const getCurrentCountry = async () => {
   const location = await getLocation()
   const countryName = await getCountryName(location.country)
