@@ -24,10 +24,12 @@ getPuzzle('2').then((puzzle) => {
   console.log(err)
 })
 
-getCountryName('TR', (error, country) => {
-  if (error) {
-    console.log(`Error: ${error}`)
-  } else {
-    console.log(country)
-  }
+/////////////////// Challenge //////////////////
+// 1) Convert getCountryName to return a new promise
+// 2) Call getCountry and use then to print country name or the error
+
+getCountryName('TR').then((country) => {
+  console.log(country)
+}, (err) => {
+  console.log(err)
 })

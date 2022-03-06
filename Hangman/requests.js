@@ -15,19 +15,19 @@ const getPuzzle = (count) => new Promise((resolve, reject) => {
   request.send()
 })
 
-const getCountryName = (countryCode, callback) => {
+const getCountryName = (countryCode) => new Promise((resolve, reject) => {
   const request2 = new XMLHttpRequest()
 
   request2.addEventListener('readystatechange', (e) => {
     if (e.target.readyState === 4 && e.target.status === 200) {
       const countries = JSON.parse(e.target.responseText)
       const myCountry = countries.find(country => country.cca2 === countryCode)
-      callback(undefined, myCountry.name.common)
+      resolve(myCountry.name.common)
     } else if (e.target.readyState === 4) {
-      callback('An error has taken place')
+      reject('An error has taken place')
     }
   })
 
   request2.open('GET', 'https://restcountries.com/v3.1/all')
   request2.send()
-}
+})
