@@ -1,33 +1,24 @@
-const getPuzzle = (count) => new Promise((resolve, reject) => {
-  const request = new XMLHttpRequest()
-
-  request.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-      const data = JSON.parse(e.target.responseText)
-      resolve(data.puzzle)
-    } else if (e.target.readyState === 4) {
-      reject('An error has taken place')
+const getPuzzle = (count) => {
+  return fetch(`http://puzzle.mead.io/puzzle?wordCount=${count}`).then((response) => {
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      throw new Error('Unable to fetch puzzle')
     }
+  }).then((data) => {
+    return data.puzzle
   })
+}
 
-  // We can call these methods before or after eventlistener, since the operation is async
-  request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${count}`)
-  request.send()
-})
-
-const getCountryName = (countryCode) => new Promise((resolve, reject) => {
-  const request2 = new XMLHttpRequest()
-
-  request2.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-      const countries = JSON.parse(e.target.responseText)
-      const myCountry = countries.find(country => country.cca2 === countryCode)
-      resolve(myCountry.name.common)
-    } else if (e.target.readyState === 4) {
-      reject('An error has taken place')
+const getCountryName = (countryCode) => {
+  return fetch('https://restcountries.com/v3.1/all').then((response) => {
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      throw new Error('Failed to fetch data')
     }
+  }).then((data) => {
+    const myCountry = data.find(country => country.cca2 === countryCode)
+    return myCountry.name.common
   })
-
-  request2.open('GET', 'https://restcountries.com/v3.1/all')
-  request2.send()
-})
+}

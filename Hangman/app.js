@@ -20,16 +20,17 @@ window.addEventListener('keypress', (e) => {
 
 getPuzzle('2').then((puzzle) => {
   console.log(puzzle)
-}, (err) => {
+}).catch((err) => {
   console.log(err)
 })
 
-/////////////////// Challenge //////////////////
-// 1) Convert getCountryName to return a new promise
-// 2) Call getCountry and use then to print country name or the error
+//////////////////// Challenge ////////////////////
+// 1) Convert getCountryName to use fetch and return a promise
+// 2) Make sure getCountryName still resolves with the country that matches
+// 3) Change getCountryName usage to use catch
 
 getCountryName('TR').then((country) => {
   console.log(country)
-}, (err) => {
+}).catch((err) => {
   console.log(err)
 })
