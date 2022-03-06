@@ -1,19 +1,19 @@
-const getPuzzle = (callback) => {
+const getPuzzle = (count) => new Promise((resolve, reject) => {
   const request = new XMLHttpRequest()
 
   request.addEventListener('readystatechange', (e) => {
     if (e.target.readyState === 4 && e.target.status === 200) {
       const data = JSON.parse(e.target.responseText)
-      callback(undefined, data.puzzle)
+      resolve(data.puzzle)
     } else if (e.target.readyState === 4) {
-      callback('An error has taken place')
+      reject('An error has taken place')
     }
   })
 
   // We can call these methods before or after eventlistener, since the operation is async
-  request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=2')
+  request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${count}`)
   request.send()
-}
+})
 
 const getCountryName = (countryCode, callback) => {
   const request2 = new XMLHttpRequest()

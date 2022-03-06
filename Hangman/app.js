@@ -18,19 +18,11 @@ window.addEventListener('keypress', (e) => {
   }
 })
 
-getPuzzle((error, puzzle) => {
-  if (error) {
-    console.log(`Error: ${error}`)
-  } else {
-    console.log(puzzle)
-  }
+getPuzzle('2').then((puzzle) => {
+  console.log(puzzle)
+}, (err) => {
+  console.log(err)
 })
-
-///////////////////// Challenge //////////////////////
-// 1) Create a new function for getting country details
-// 2) Call it with two arguments: country code, the callback function
-// 3) Make the HTTP request and call the callback with country information
-// 4) Use the callback to print the country name
 
 getCountryName('TR', (error, country) => {
   if (error) {
