@@ -24,18 +24,8 @@ getPuzzle('2').then((puzzle) => {
   console.log(err)
 })
 
-////////////////// Challenge //////////////////
-// 1) Create getLocation function which takes no argument
-// 2) Setup getLocation to make a request to the url and parse the data
-// 3) Use getLocation to print the city, region, and country information
-
-// Part 2: Call getCountryName method with promise chaining
-
-getLocation().then((location) => {
-  console.log(`You are currently at ${location.city}, ${location.region}, ${location.country}`)
-  return getCountryName(location.country)
-}).then((country) => {
-  console.log(country)
+getCurrentCountry().then((countryName) => {
+  console.log(countryName)
 }).catch((err) => {
   console.log(err)
 })

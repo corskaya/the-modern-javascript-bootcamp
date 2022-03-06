@@ -9,10 +9,6 @@ const getPuzzle = async (count) => {
   }
 }
 
-///////////////////// Challenge 1 //////////////////////
-// 1) Convert getCountryName to an async function that uses await
-// 2) Convert getLocation to an async function that uses await
-
 const getCountryName = async (countryCode) => {
   const response = await fetch('https://restcountries.com/v3.1/all')
 
@@ -33,4 +29,15 @@ const getLocation = async () => {
   } else {
     throw new Error('Unable to fetch data')
   }
+}
+
+///////////////////// Challenge 2 //////////////////////
+// 1) Create a new function called getCurrentCountry
+// 2) Should return a promise that resolves the country object for your current location
+// 3) Use async/await for the new function
+
+const getCurrentCountry = async () => {
+  const location = await getLocation()
+  const countryName = await getCountryName(location.country)
+  return countryName
 }
