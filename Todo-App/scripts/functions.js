@@ -40,7 +40,8 @@ const generateTodoDOM = () => {
   let showingTodos = hideCheck ? leftToDo : todos
 
   showingTodos.forEach(todo => {
-    let todoArea = document.createElement('div')
+    let todoArea = document.createElement('label')
+    let container = document.createElement('div')
     let checkbox = document.createElement('input')
     let todoText = document.createElement('span')
     let removeButton = document.createElement('button')
@@ -53,7 +54,7 @@ const generateTodoDOM = () => {
 
       if (todo.completed) checkbox.setAttribute('checked', '')
 
-      todoArea.appendChild(checkbox)
+      container.appendChild(checkbox)
       checkbox.addEventListener('change', e => {
         todo.completed = e.target.checked
         saveTodos(todos)
@@ -65,10 +66,16 @@ const generateTodoDOM = () => {
 
       // Setup todo text
       todoText.textContent = todo.text
-      todoArea.appendChild(todoText)
+      container.appendChild(todoText)
+
+      // Setup container
+      todoArea.classList.add('list-item')
+      container.classList.add('list-item__container')
+      todoArea.appendChild(container)
 
       // Setup the remove button
       removeButton.textContent = 'x'
+      removeButton.classList.add('button', 'button--text')
       todoArea.appendChild(removeButton)
       removeButton.addEventListener('click', () => {
         removeTodo(todo.id)
@@ -82,7 +89,13 @@ const generateTodoDOM = () => {
 const getSummary = () => {
   leftToDo = todos.filter(todo => !todo.completed)
   let explanation = document.createElement('h3')
-  explanation.textContent = `You have ${leftToDo.length} todos left`
+  explanation.classList.add('list-title')
+  const plural = leftToDo.length === 1 ? '' : 's'
+  if (leftToDo.length > 0) {
+    explanation.textContent = `You have ${leftToDo.length} todo${plural} left`
+  } else {
+    explanation.textContent = `All todos are done`
+  }
   document.querySelector('#explanation').innerHTML = ''
   document.querySelector('#explanation').appendChild(explanation)
 }

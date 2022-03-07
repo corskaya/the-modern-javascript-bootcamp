@@ -21,9 +21,10 @@ filterInput.addEventListener('input', e => {
 
 input.addEventListener('change', e => {
   inputValue = e.target.value
+  inputValue = inputValue.trim()
 })
 
-button.addEventListener('click', e => {
+button.addEventListener('click', () => {
   if (inputValue) {
     let todoContent = { id: uuidv4(), text: inputValue, completed: false, checked: false }
     todos.push(todoContent)
