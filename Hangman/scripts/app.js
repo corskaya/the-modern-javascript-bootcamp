@@ -6,14 +6,18 @@ window.addEventListener('keypress', (e) => {
   if (game1.status === 'Playing') {
     const char = String.fromCharCode(e.charCode)
     game1.makeGuess(char)
-    puzzleEl.textContent = `Word : ${game1.puzzle}`
+    render()
     game1.statusMessage
   }
 })
 
 const render = () => {
-  puzzleEl.textContent = `Word : ${game1.puzzle}`
+  puzzleEl.innerHTML = ''
   game1.statusMessage
+
+  game1.puzzle.split('').forEach(char => {
+    puzzleEl.innerHTML += `<span>${char}</span>`
+  })
 }
 
 const startGame = async () => {
