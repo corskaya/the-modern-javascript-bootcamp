@@ -1,15 +1,21 @@
 const path = require('path')
 
 module.exports = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'public/scripts'),
-    filename: 'bundle.js'
-  }
+    entry: './src/index.js',
+    output: {
+        path: path.resolve(__dirname, 'public/scripts'),
+        filename: 'bundle.js'
+    },
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['env']
+                }
+            }
+        }]
+    }
 }
-
-// Relative Path
-// C:\Users\cagri.orskaya\Projects\The Modern JavaScript Bootcamp\Boilerplate
-
-// Absolute Path
-// path.resolve(__dirname, 'public/scripts')
