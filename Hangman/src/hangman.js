@@ -1,7 +1,5 @@
-/////////////// Challenge ///////////////
-// 1) Convert "getStatusMessage()" to a custom getter for "statusMessage"
-// 2) Convert "getPuzzle()" to a custom getter for "puzzle"
-// 3) Change usage in app.js
+import { statusEl } from './index'
+import { game1 } from './index'
 
 class HangmanGame {
   constructor(word, remainingGuesses) {
@@ -65,3 +63,5 @@ class HangmanGame {
     }
   }
 }
+
+export { HangmanGame as default }

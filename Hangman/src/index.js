@@ -1,6 +1,9 @@
+import HangmanGame from './hangman'
+import getPuzzle from './requests'
+
 const puzzleEl = document.getElementById('puzzle')
-const statusEl = document.getElementById('status')
-let game1
+export const statusEl = document.getElementById('status')
+export let game1
 
 window.addEventListener('keypress', (e) => {
   if (game1.status === 'Playing') {
@@ -29,15 +32,3 @@ const startGame = async () => {
 document.querySelector('#reset').addEventListener('click', startGame)
 
 startGame()
-
-// getPuzzle('2').then((puzzle) => {
-//   console.log(puzzle)
-// }).catch((err) => {
-//   console.log(err)
-// })
-
-// getCurrentCountry().then((countryName) => {
-//   console.log(countryName)
-// }).catch((err) => {
-//   console.log(err)
-// })
