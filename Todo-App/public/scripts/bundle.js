@@ -10904,6 +10904,10 @@ exports.toggleTodo = exports.removeTodo = exports.createTodo = exports.getTodos 
 
 var _v = __webpack_require__(/*! uuid/v4 */ "./node_modules/uuid/v4.js");
 
+var _v2 = _interopRequireDefault(_v);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var todos = [];
 
 // loadTodos
@@ -10940,7 +10944,7 @@ var saveTodos = function saveTodos() {
 // return: none
 var createTodo = function createTodo(text) {
   todos.push({
-    id: (0, _v.uuidv4)(),
+    id: (0, _v2.default)(),
     text: text,
     completed: false
   });

@@ -1,6 +1,6 @@
 /////////////////// Challenge /////////////////
 
-import { uuidv4 } from 'uuid/v4'
+import uuidv4 from 'uuid/v4'
 
 let todos = []
 
